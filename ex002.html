@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudo Promise</title>
+    <style>
+        .numero{
+            font-size: larger;
+        }
+        .ok{
+            color: #00f;
+            font-size: 3em;
+        }
+        .erro{
+            color: #f00;
+            font-size: 3em;
+        }
+        .btn_promessa{
+            border: 3px solid red;
+            width: 40px;
+            height: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div id="numero" class="numero"></div>
+    <button id="btn_promessa">Promessa</button>
+
+ <script>
+ const numero = document.querySelector("#numero")
+ const botao = document.querySelector("#btn_promessa")
+
+ const funcaoExecutar = () =>{
+let promessa = new Promise((exeTrue, exeFalse)=>{
+     let resultado = false
+     let tempo = 3000
+     setTimeout(()=>{
+    if(resultado){
+        exeTrue("deu tudo Certo")
+    }else{
+        exeFalse("deu tudo Errado")
+    }
+ },tempo)
+ })
+ return promessa
+  
+  }
+ 
+ botao.addEventListener("click",(evt)=>{
+ funcaoExecutar()
+ .then((exec)=>{
+    numero.innerHTML = exec
+    numero.classList.add("ok")
+    numero.classList.remove("erro")
+ })
+ .catch((exec)=>{
+    numero.innerHTML = exec
+    numero.classList.add("erro")
+    numero.classList.add("ok")
+ })
+ numero.innerHTML = "Processando..."
+  
+ })
+ numero.innerHTML = "Em Espera"
+
+   </script>
+</body>
+</html>
